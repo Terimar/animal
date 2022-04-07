@@ -2,6 +2,8 @@ package com.solvd.laba;
 
 import com.solvd.laba.animals.Animal;
 
+import java.util.Objects;
+
 public class Aviary {
 
     private int id;
@@ -32,5 +34,23 @@ public class Aviary {
         this.animal = animal;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Aviary aviary = (Aviary) o;
+        return id == aviary.id;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Aviary{" +
+                "id=" + id +
+                '}';
+    }
 }
