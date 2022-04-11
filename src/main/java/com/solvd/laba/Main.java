@@ -5,9 +5,14 @@ import com.solvd.laba.animals.*;
 import com.solvd.laba.exceptions.AgeWrongException;
 import com.solvd.laba.exceptions.LimitAviaryException;
 import com.solvd.laba.utils.LinkedList;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -125,5 +130,23 @@ public class Main {
         Animal tempAnimal = a.getAnimal();
         a.setAnimal(b.getAnimal());
         b.setAnimal(tempAnimal);
+    }
+
+    public static void countUniqueWords() {
+        try {
+            File f = new File("src/main/resources/caribou.txt");
+            String s = StringUtils.lowerCase(FileUtils.readFileToString(f, StandardCharsets.UTF_8))
+                    .replaceAll("[^\\da-zA-Za ]", "");
+            String[] arr = s.split(" ");
+            Set<String> set = new HashSet(List.of(arr));
+            List<String> lst = new ArrayList<>();
+            for (String str : set) {
+                lst.add(str + " " + StringUtils.countMatches(s, str));
+            }
+            FileUtils.writeLines(new File("src/main/resources/uniqueWords.txt"), lst);
+            LOGGER.info("The result is entered in the 'uniqueWords' file");
+        } catch (IOException e) {
+            LOGGER.info(e);
+        }
     }
 }
