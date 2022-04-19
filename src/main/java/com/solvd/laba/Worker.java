@@ -8,7 +8,9 @@ public class Worker {
     private String lastName;
     private String position;
 
-    public Worker() {
+    public Worker() {}
+
+    public Worker(String firstName) {
     }
 
     public Worker(String firstName, String lastName, String position) {

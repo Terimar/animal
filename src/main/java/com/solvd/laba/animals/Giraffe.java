@@ -5,6 +5,10 @@ import com.solvd.laba.interfaces.IMove;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
 public class Giraffe extends Animal implements IMove {
 
     private static final Logger LOGGER = LogManager.getLogger(Giraffe.class);
@@ -35,6 +39,14 @@ public class Giraffe extends Animal implements IMove {
             }
         } catch (AgeWrongException e) {
             LOGGER.error("I need to grow up");
+        }
+    }
+
+    public static void procAge(List<Giraffe> allGiraffes, Predicate<Giraffe> predicate, Consumer<Giraffe> consumer) {
+        for(Giraffe gi : allGiraffes) {
+            if (predicate.test(gi)) {
+                consumer.accept(gi);
+            }
         }
     }
 }

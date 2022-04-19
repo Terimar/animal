@@ -4,6 +4,10 @@ import com.solvd.laba.Food;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+
 public abstract class Animal {
 
     private static final Logger LOGGER = LogManager.getLogger(Animal.class);
@@ -83,6 +87,14 @@ public abstract class Animal {
                 LOGGER.info("Thank you, only " + food.getPortion() + " portions are left");
             } else {
                 LOGGER.info("Sorry, I don't eat this food");
+            }
+        }
+    }
+
+    public static void procAnimal(List<Animal> animalsList, Predicate<Animal> predicate, Consumer<Animal> consumer) {
+        for(Animal an : animalsList) {
+            if (predicate.test(an)) {
+                consumer.accept(an);
             }
         }
     }

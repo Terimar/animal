@@ -4,6 +4,9 @@ package com.solvd.laba;
 import com.solvd.laba.animals.*;
 import com.solvd.laba.exceptions.AgeWrongException;
 import com.solvd.laba.exceptions.LimitAviaryException;
+import com.solvd.laba.interfaces.functional.IArrive;
+import com.solvd.laba.interfaces.functional.ILeave;
+import com.solvd.laba.interfaces.functional.ITitle;
 import com.solvd.laba.utils.LinkedList;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +17,11 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static com.solvd.laba.animals.Animal.procAnimal;
+import static com.solvd.laba.animals.Giraffe.procAge;
 
 
 public class Main {
@@ -36,6 +44,21 @@ public class Main {
         linkedWorkers.remove(worker3);
         LOGGER.info(linkedWorkers.get(worker));
 
+        ITitle<Worker> titleWorker = ()->{
+            Scanner in = new Scanner(System.in);
+            LOGGER.info("Enter a name: ");
+            String firstName = in.nextLine();
+            return new Worker(firstName);
+        };
+        Worker worker5 = titleWorker.get();
+        LOGGER.info("Name worker: " + worker5.getFirstName());
+
+        IArrive ar = s -> LOGGER.info(s);
+        ar.arrive("An employee has arrived");
+
+        ILeave l = s -> LOGGER.info(s);
+        l.leave("The employee left");
+
         Animal lion = new Lion(1, "carnivore", 5, 63.4f);
         Animal lion2 = new Lion(2, "carnivore", 5, 63.4f);
         LOGGER.info(lion);
@@ -43,6 +66,12 @@ public class Main {
         LOGGER.info(zebra);
         Animal tiger = new Tiger(4, "carnivore", 4, 66.5f);
         LOGGER.info(tiger);
+
+        List<Animal> animalsList = Stream.of(lion, zebra, tiger).collect(Collectors.toList());
+
+        procAnimal(animalsList,
+                an -> an.getType().equals("carnivore") && an.getAge() > 1,
+                an -> LOGGER.info(an.toString()));
 
         Map<String, Animal> firstPartOfAnimals = new HashMap<>();
         firstPartOfAnimals.put("AlexLion", lion);
@@ -109,6 +138,10 @@ public class Main {
         allGiraffes.add(giraffeYoung);
         allGiraffes.add(giraffeOld);
 
+        procAge(allGiraffes,
+                gi -> gi.getAge() > 1,
+                gi -> LOGGER.info(gi.toString()));
+
         Map<String, Animal> giraffeMap = new HashMap<>();
         int i = 1;
         String key = "giraffe";
@@ -124,6 +157,7 @@ public class Main {
         for (Giraffe g : allGiraffes) {
             g.move();
         }
+
     }
 
     public static void changeAviaries(Aviary a, Aviary b) {
