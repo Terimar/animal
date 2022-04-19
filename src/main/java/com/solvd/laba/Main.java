@@ -92,6 +92,9 @@ public class Main {
 
         Zoo zoo = new Zoo("Zooland", 10);
 
+        String z = Stream.of("Z", "o" ,"o", "L", "a", "n", "d").collect(Collectors.joining());
+        LOGGER.info(z);
+
         Set<Aviary> freeAviaries = new HashSet<>();
         for (Aviary aviary : aviaries) {
             if (aviary.getAnimal() == null) {
