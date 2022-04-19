@@ -44,6 +44,8 @@ public class Main {
         linkedWorkers.remove(worker3);
         LOGGER.info(linkedWorkers.get(worker));
 
+        Stream.of(linkedWorkers).findFirst();
+
         ITitle<Worker> titleWorker = ()->{
             Scanner in = new Scanner(System.in);
             LOGGER.info("Enter a name: ");
@@ -51,7 +53,7 @@ public class Main {
             return new Worker(firstName);
         };
         Worker worker5 = titleWorker.get();
-        LOGGER.info("Name worker: " + worker5.getFirstName());
+        LOGGER.info("Name worker5: " + worker5.getFirstName());
 
         IArrive ar = s -> LOGGER.info(s);
         ar.arrive("An employee has arrived");
@@ -137,6 +139,8 @@ public class Main {
         allGiraffes.add(giraffe);
         allGiraffes.add(giraffeYoung);
         allGiraffes.add(giraffeOld);
+        Stream<Giraffe> streamG = allGiraffes.stream();
+        streamG.filter(g-> g.getAge() == 5).forEach(g-> LOGGER.info(g));
 
         procAge(allGiraffes,
                 gi -> gi.getAge() > 1,
@@ -157,7 +161,6 @@ public class Main {
         for (Giraffe g : allGiraffes) {
             g.move();
         }
-
     }
 
     public static void changeAviaries(Aviary a, Aviary b) {

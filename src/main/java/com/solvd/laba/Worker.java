@@ -11,6 +11,7 @@ public class Worker {
     public Worker() {}
 
     public Worker(String firstName) {
+        this.firstName = firstName;
     }
 
     public Worker(String firstName, String lastName, String position) {
