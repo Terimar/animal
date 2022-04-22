@@ -2,7 +2,6 @@ package com.solvd.laba;
 
 
 import com.solvd.laba.animals.*;
-import com.solvd.laba.exceptions.AgeWrongException;
 import com.solvd.laba.exceptions.LimitAviaryException;
 import com.solvd.laba.interfaces.functional.IArrive;
 import com.solvd.laba.interfaces.functional.ILeave;
@@ -20,15 +19,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.solvd.laba.animals.Animal.procAnimal;
-import static com.solvd.laba.animals.Giraffe.procAge;
+import static com.solvd.laba.animals.Animal.animalSort;
+import static com.solvd.laba.animals.Giraffe.ageSort;
 
 
 public class Main {
 
     private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
-    public static void main(String[] args) throws AgeWrongException, LimitAviaryException {
+    public static void main(String[] args) {
         Food meat = new Food("Meat", 3);
         Food herbal = new Food("Herbal", 2);
 
@@ -43,8 +42,6 @@ public class Main {
         linkedWorkers.addLast(worker4);
         linkedWorkers.remove(worker3);
         LOGGER.info(linkedWorkers.get(worker));
-
-        Stream.of(linkedWorkers).findFirst();
 
         ITitle<Worker> titleWorker = ()->{
             Scanner in = new Scanner(System.in);
@@ -69,11 +66,16 @@ public class Main {
         Animal tiger = new Tiger(4, "carnivore", 4, 66.5f);
         LOGGER.info(tiger);
 
-        List<Animal> animalsList = Stream.of(lion, zebra, tiger).collect(Collectors.toList());
+        List<Animal> animals = Stream.of(lion, zebra, tiger).collect(Collectors.toList());
 
-        procAnimal(animalsList,
+        animalSort(animals,
                 an -> an.getType().equals("carnivore") && an.getAge() > 1,
                 an -> LOGGER.info(an.toString()));
+
+        Animal firstCarnivore = animals.stream()
+                .filter(an -> "carnivore".equals(an.getType()))
+                .findFirst()
+                .orElse(null);
 
         Map<String, Animal> firstPartOfAnimals = new HashMap<>();
         firstPartOfAnimals.put("AlexLion", lion);
@@ -102,7 +104,11 @@ public class Main {
             }
         }
 
-        zoo.setAviaryList(aviaries);
+        try {
+            zoo.setAviaryList(aviaries);
+        } catch (LimitAviaryException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
         LOGGER.info("you have " + freeAviaries.size() + " free aviaries");
 
         lion.say();
@@ -143,18 +149,18 @@ public class Main {
         allGiraffes.add(giraffeYoung);
         allGiraffes.add(giraffeOld);
         Stream<Giraffe> streamG = allGiraffes.stream();
-        streamG.filter(g-> g.getAge() == 5).forEach(g-> LOGGER.info(g));
+        streamG.filter(g -> g.getAge() == 5).forEach(g -> LOGGER.info(g.getId()));
 
-        procAge(allGiraffes,
+        ageSort(allGiraffes,
                 gi -> gi.getAge() > 1,
-                gi -> LOGGER.info(gi.toString()));
+                gi -> LOGGER.info(gi.getId()));
 
         Map<String, Animal> giraffeMap = new HashMap<>();
         int i = 1;
         String key = "giraffe";
         for (Giraffe item : allGiraffes) {
             giraffeMap.put(key + i, item);
-            i += 1;
+            i++;
         }
 
         Map<String, Animal> allAnimals = new HashMap<>();
@@ -164,6 +170,8 @@ public class Main {
         for (Giraffe g : allGiraffes) {
             g.move();
         }
+
+        countUniqueWords();
     }
 
     public static void changeAviaries(Aviary a, Aviary b) {
@@ -175,18 +183,19 @@ public class Main {
     public static void countUniqueWords() {
         try {
             File f = new File("src/main/resources/caribou.txt");
-            String s = StringUtils.lowerCase(FileUtils.readFileToString(f, StandardCharsets.UTF_8))
+            String fileText = FileUtils.readFileToString(f, StandardCharsets.UTF_8)
+                    .toLowerCase(Locale.ROOT)
                     .replaceAll("[^\\da-zA-Za ]", "");
-            String[] arr = s.split(" ");
-            Set<String> set = new HashSet(List.of(arr));
-            List<String> lst = new ArrayList<>();
-            for (String str : set) {
-                lst.add(str + " " + StringUtils.countMatches(s, str));
+            String[] words = fileText.split(" ");
+            Set<String> wordsSet = new HashSet<>(List.of(words));
+            List<String> uniqueWordsCount = new ArrayList<>();
+            for (String str : wordsSet) {
+                uniqueWordsCount.add(str + " " + StringUtils.countMatches(fileText, str));
             }
-            FileUtils.writeLines(new File("src/main/resources/uniqueWords.txt"), lst);
+            FileUtils.writeLines(new File("src/main/resources/uniqueWords.txt"), uniqueWordsCount);
             LOGGER.info("The result is entered in the 'uniqueWords' file");
         } catch (IOException e) {
-            LOGGER.info(e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 }

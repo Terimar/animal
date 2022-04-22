@@ -25,24 +25,18 @@ public class Giraffe extends Animal implements IMove {
         LOGGER.info("I am " + super.getType() + " and I will eat only herbal");
     }
 
-    public void move() throws AgeWrongException {
-        int giraffeAge = getAge();
-        if (giraffeAge > 50) {
-            LOGGER.error("Usually giraffe lives less than 50 years");
-            throw new AgeWrongException("It seems like age is wrong");
-        }
+    public void move() {
         try {
-            if (giraffeAge < 2) {
-                throw new AgeWrongException("I can't walk without mummy");
-            } else {
-                LOGGER.info("I can walk on my own");
+            if (getAge() < 2 || getAge() > 50) {
+                throw new AgeWrongException("I can't walk");
             }
+            LOGGER.info("I can walk on my own");
         } catch (AgeWrongException e) {
-            LOGGER.error("I need to grow up");
+            LOGGER.error("I can't walk");
         }
     }
 
-    public static void procAge(List<Giraffe> allGiraffes, Predicate<Giraffe> predicate, Consumer<Giraffe> consumer) {
+    public static void ageSort(List<Giraffe> allGiraffes, Predicate<Giraffe> predicate, Consumer<Giraffe> consumer) {
         for(Giraffe gi : allGiraffes) {
             if (predicate.test(gi)) {
                 consumer.accept(gi);

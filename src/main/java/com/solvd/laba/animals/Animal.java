@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -91,7 +92,7 @@ public abstract class Animal {
         }
     }
 
-    public static void procAnimal(List<Animal> animalsList, Predicate<Animal> predicate, Consumer<Animal> consumer) {
+    public static void animalSort(List<Animal> animalsList, Predicate<Animal> predicate, Consumer<Animal> consumer) {
         for(Animal an : animalsList) {
             if (predicate.test(an)) {
                 consumer.accept(an);
@@ -101,14 +102,14 @@ public abstract class Animal {
 
     @Override
     public int hashCode() {
-        int x = type.equals("herbivore") ? 2 : 3;
-        int weight = (int) getWeight();
-        int age = getAge();
-        return x * weight * age;
+        return Objects.hash(id, type);
     }
 
     @Override
-    public boolean equals(Object object) {
-        return hashCode() == object.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal  = (Animal) o;
+        return id == animal.id && Objects.equals(type, animal.type);
     }
 }
