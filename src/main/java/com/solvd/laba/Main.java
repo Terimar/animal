@@ -14,6 +14,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -172,6 +174,18 @@ public class Main {
         }
 
         countUniqueWords();
+
+        Class<Zoo> zooClass = Zoo.class;
+        Field[] declaredFields = zooClass.getDeclaredFields();
+        for (Field field : declaredFields) {
+            LOGGER.info(field);
+        }
+
+        Class<Zoo> zoClass = Zoo.class;
+        Method[] declaredMethods = zoClass.getDeclaredMethods();
+        for (Method method : declaredMethods) {
+            LOGGER.info(method);
+        }
     }
 
     public static void changeAviaries(Aviary a, Aviary b) {
