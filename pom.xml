@@ -22,15 +22,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <includes>
-                        <include>**/properties/*</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/*.png</exclude>
-                    </excludes>
-                    <archive>
-                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
+                    <finalName>myJar</finalName>
                 </configuration>
             </plugin>
         </plugins>

@@ -14,9 +14,7 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -175,6 +173,7 @@ public class Main {
             g.move();
         }
 
+        //Counting unique words in a file
         countUniqueWords();
 
         Class<Zoo> zooClass = Zoo.class;
@@ -191,6 +190,42 @@ public class Main {
 
         Class<Food> foodClass = Food.class;
         LOGGER.info("Constructors: " + Arrays.toString(foodClass.getConstructors()));
+
+        final String resource1 = "Test ";
+        final String resource2 = "Deadlock";
+
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                synchronized(resource1) {
+                    LOGGER.info("Thread 1: Locked resource1");
+                    try {
+                        Thread.sleep(100);
+                    }
+                    catch(Exception e) {}
+                    synchronized(resource2) {
+                        LOGGER.info("Thread 1: Locked resource2");
+                    }
+                }
+            }
+        };
+
+        Thread t = new Thread() {
+            public void run() {
+                synchronized(resource1) {
+                    LOGGER.info("Thread 2: Locked resource1");
+                    try {
+                        Thread.sleep(100);
+                    } catch(Exception e) {}
+                    synchronized(resource2) {
+                        LOGGER.info("Thread 2: Locked resource2");
+                    }
+                }
+            }
+        };
+
+        new Thread(r).start();
+        t.start();
     }
 
     public static void changeAviaries(Aviary a, Aviary b) {
