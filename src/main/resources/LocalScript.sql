@@ -110,6 +110,26 @@ select doctors.idDoctors, doctors.name, departments.name
 from doctors
 inner join departments on doctors.idDoctors=departments.chief_physician;
 
+-- aggregate functions
 update patients set age=20 where idPatients=1;
 update patients set age=22 where idPatients=2;
 select name, avg(age) from patients group by age;
+select avg(age) as avg_age from patients;
+select min(age) as min_age from patients;
+select max(age) as nax_age from patients;
+select sum(age) as sum_age from patients;
+select count(*) as count_age from patients where age > 21;
+select count(name) as count_name from patients;
+
+update doctors set age=40 where idDoctors=1;
+update doctors set age=30 where idDoctors=3;
+update nurses set age=35 where idNurses=1;
+update nurses set age=32 where idNurses=2;
+
+select min(age), name as min_age from patients group by name having min(age) < 21;
+select max(age), name as max_age from patients group by name having max(age) > 21;
+select name, avg(age) age from patients group by name having age between 20 and 30;
+select min(age), name as min_age from doctors group by name having min(age) < 40;
+select max(age), name as max_age from doctors group by name having max(age) > 30;
+select min(age), name as min_age from nurses group by name having min(age) < 35;
+select max(age), name as max_age from nurses group by name having max(age) > 30;
