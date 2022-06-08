@@ -1,12 +1,21 @@
 package com.solvd.laba.hospital.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Employee extends Person {
 
     private Position position;
     private Integer qualification;
     private Specialization specialization;
+
+    @XmlElementWrapper(name = "appointments")
+    @XmlElement(name="appointment")
     private List<Appointment> appointments;
 
     public enum Position {

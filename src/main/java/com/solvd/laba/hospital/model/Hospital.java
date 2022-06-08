@@ -1,12 +1,21 @@
 package com.solvd.laba.hospital.model;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.util.List;
 
+@XmlRootElement(name = "hospital")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Hospital {
 
     private Long id;
+
+    @XmlAttribute(name = "title")
     private String title;
     private Employee chiefDoctor;
+
+    @XmlElementWrapper(name = "departments")
+    @XmlElement(name="department")
     private List<Department> departments;
     private Address address;
     private Integer phoneNumber;

@@ -1,9 +1,15 @@
 package com.solvd.laba.hospital.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+
 import java.util.Date;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Appointment {
 
+    @XmlAttribute(name = "id")
     private Long id;
     private Patient patient;
     private Room room;

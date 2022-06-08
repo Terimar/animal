@@ -1,7 +1,13 @@
 package com.solvd.laba.hospital.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Person {
 
+    @XmlAttribute(name = "id")
     private Long id;
     private String firstName;
     private String lastName;

@@ -1,12 +1,20 @@
 package com.solvd.laba.hospital.model;
 
+import jakarta.xml.bind.annotation.*;
+
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Department {
 
     private Long id;
+
+    @XmlAttribute(name = "title")
     private String title;
     private Employee departmentHead;
+
+    @XmlElementWrapper(name = "employees")
+    @XmlElement(name="employee")
     private List<Employee> employees;
     private List<Ward> wards;
     private List<Equipment> equipments;

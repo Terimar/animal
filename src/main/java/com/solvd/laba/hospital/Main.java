@@ -5,6 +5,7 @@ import com.solvd.laba.hospital.service.EmployeeService;
 import com.solvd.laba.hospital.service.RoomService;
 import com.solvd.laba.hospital.service.SupplierService;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,14 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        File xmlFile = new File("src/main/resources/files/hospital.xml");
+
+        DomParser domParser = new DomParser();
+        Hospital parsedDomHospital = domParser.parse(xmlFile);
+
+        JaxbParser jaxbParser = new JaxbParser();
+        Hospital parsedJaxbHospital = jaxbParser.parse(xmlFile);
+
         Supplier supplier1 = new Supplier();
         supplier1.setName("Trenker");
         supplier1.setCountry("Belgium");
