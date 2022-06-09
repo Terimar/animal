@@ -1,5 +1,7 @@
 package com.solvd.laba.hospital.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.solvd.laba.hospital.JacksonParser;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -10,6 +12,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Employee extends Person {
 
+    @JsonDeserialize(using = JacksonParser.PositionDeserializer.class)
     private Position position;
     private Integer qualification;
     private Specialization specialization;

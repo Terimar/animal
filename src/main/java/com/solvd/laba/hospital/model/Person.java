@@ -1,5 +1,6 @@
 package com.solvd.laba.hospital.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -10,6 +11,8 @@ public abstract class Person {
     @XmlAttribute(name = "id")
     private Long id;
     private String firstName;
+
+    @JsonProperty("lastOrMiddleName")
     private String lastName;
 
     public Long getId() {

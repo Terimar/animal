@@ -21,6 +21,11 @@ public class Main {
         JaxbParser jaxbParser = new JaxbParser();
         Hospital parsedJaxbHospital = jaxbParser.parse(xmlFile);
 
+        File jsonFile = new File("src/main/resources/files/hospital.json");
+
+        JacksonParser jacksonParser = new JacksonParser();
+        Hospital parsedJacksonHospital = jacksonParser.parse(jsonFile);
+
         Supplier supplier1 = new Supplier();
         supplier1.setName("Trenker");
         supplier1.setCountry("Belgium");

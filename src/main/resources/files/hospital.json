@@ -1,0 +1,60 @@
+{
+  "title": "hosp",
+  "chiefDoctor": {
+    "firstName": "Azamat",
+    "lastOrMiddleName": "Azamatov",
+    "position": "head",
+    "qualification": 20,
+    "specialization": {
+      "name": "surgeon",
+      "salary": 10000
+    },
+    "appointments": [
+      {
+        "id": 1,
+        "date": "2022-01-10"
+      },
+      {
+        "id": 1,
+        "date": "2022-01-15"
+      }
+    ]
+  },
+  "departments": [
+    {
+      "title": "dep1",
+      "employees": [
+        {
+          "id": 1,
+          "firstName": "Ivan",
+          "lastOrMiddleName": "Ivanov"
+        },
+        {
+          "id": 2,
+          "firstName": "Petr",
+          "lastOrMiddleName": "Petrov"
+        }
+      ]
+    },
+    {
+      "title": "dep2",
+      "employees": [
+        {
+          "id": 3,
+          "firstName": "Ilia",
+          "lastOrMiddleName": "Iliich"
+        },
+        {
+          "id": 4,
+          "firstName": "Nikita",
+          "lastOrMiddleName": "Nikitin"
+        }
+      ]
+    }
+  ],
+  "address": {
+    "city": "Minsk",
+    "street": "Street1",
+    "buildingNumber": "10"
+  }
+}
