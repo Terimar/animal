@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.laba.hospital.dao.IRoomDao">
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into Rooms (number) values (#{number})
+    </insert>
+
+    <select id="getEntityById" resultMap="RoomResultMap">
+        select id, number from Rooms where id = #{id}
+    </select>
+
+    <update id="updateEntity">
+        update Rooms set number = #{number} where id = #{id}
+    </update>
+
+    <delete id="removeEntity">
+        delete from Rooms where id = #{id}
+    </delete>
+
+    <resultMap id="RoomResultMap" type="com.solvd.laba.hospital.model.Room" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="number" column="number"/>
+    </resultMap>
+</mapper>

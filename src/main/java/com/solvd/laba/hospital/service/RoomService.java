@@ -1,11 +1,13 @@
 package com.solvd.laba.hospital.service;
 
+import com.solvd.laba.hospital.dao.IRoomDao;
 import com.solvd.laba.hospital.dao.impl.RoomDao;
+import com.solvd.laba.hospital.dao.impl.RoomMybatisDao;
 import com.solvd.laba.hospital.model.Room;
 
 public class RoomService {
 
-    private final RoomDao roomDao = new RoomDao();
+    private final IRoomDao roomDao = new RoomMybatisDao();//new RoomDao();
 
     public Room create(Room room) {
         roomDao.saveEntity(room);

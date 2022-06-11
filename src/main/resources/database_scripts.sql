@@ -2,28 +2,28 @@ use
 hospital;
 
 insert into Suppliers (name, country)
-values ("Belmedtechnic", "Belarus"),
-       ("Belmedpreparaty", "Belarus"),
-       ("DealMed", "Russia"),
-       ("Tagler", "Russia"),
-       ("Sigma", "Germany"),
-       ("Vermeiren", "Belgium"),
-       ("Glavpharm", "Russia"),
-       ("Atalantique repartition", "France");
+values ('Belmedtechnic', 'Belarus'),
+       ('Belmedpreparaty', 'Belarus'),
+       ('DealMed', 'Russia'),
+       ('Tagler', 'Russia'),
+       ('Sigma', 'Germany'),
+       ('Vermeiren', 'Belgium'),
+       ('Glavpharm', 'Russia'),
+       ('Atalantique repartition', 'France');
 
 insert into Equipments (name, price)
-values ("dropper", 20.4),
-       ("deffibrilator", 100.8),
-       ("ultrasonic dissector", 300.7),
-       ("feeding tube", 3.0),
-       ("operation table", 30.6);
+values ('dropper', 20.4),
+       ('deffibrilator', 100.8),
+       ('ultrasonic dissector', 300.7),
+       ('feeding tube', 3.0),
+       ('operation table', 30.6);
 
 insert into Medications (name, form, dosage, price)
-values ("Ibypophen", "pills", 5.0, 4.2),
-       ("Cetorolac", "pills", 3.4, 2.6),
-       ("Ambroksol", "pills", 2.1, 1.2),
-       ("Furasol", "powder", 5, 0.9),
-       ("Levomekol", "ointment", 7, 2.3);
+values ('Ibypophen', 'pills', 5.0, 4.2),
+       ('Cetorolac', 'pills', 3.4, 2.6),
+       ('Ambroksol', 'pills', 2.1, 1.2),
+       ('Furasol', 'powder', 5, 0.9),
+       ('Levomekol', 'ointment', 7, 2.3);
 
 insert into Equipment_suppliers (equipment_id, supplier_id)
 values (4, 1),
@@ -44,73 +44,73 @@ values (1, 2),
        (3, 5);
 
 insert into Addresses (city, street, building_number)
-values ("Minsk", "Uralskaya", "5/1"),
-       ("Minsk", "Filatava", "9"),
-       ("Vitebsk", "Frunze", "71");
+values ('Minsk', 'Uralskaya', '5/1'),
+       ('Minsk', 'Filatava', '9'),
+       ('Vitebsk', 'Frunze', '71');
 
 insert into Specializations (name, salary)
-values ("anesthetist", 1000.0),
-       ("cardiologist", 1500.2),
-       ("oncologist", 1600.3),
-       ("surgeon", 1100.5),
-       ("traumatologist", 990.7),
-       ("neuropathologist", 800.0),
-       ("dentist", 2000.7),
-       ("therapist", 850.3);
+values ('anesthetist', 1000.0),
+       ('cardiologist', 1500.2),
+       ('oncologist', 1600.3),
+       ('surgeon', 1100.5),
+       ('traumatologist', 990.7),
+       ('neuropathologist', 800.0),
+       ('dentist', 2000.7),
+       ('therapist', 850.3);
 
-insert into Employees (first_name, last_name, specialization_id, position)
-values ("Ivan", "Ivanov", 2, "DOCTOR"),
-       ("Petr", "Petrov", 3, "DOCTOR"),
-       ("Maria", "Loseva", 5, "DOCTOR"),
-       ("Vladimir", "Vladimirov", 1, "DEPARTMENT_HEAD"),
-       ("Petr", "Ivanov", 2, "DEPARTMENT_HEAD"),
-       ("Zinaida", "Morozova", 3, "DEPARTMENT_HEAD"),
-       ("Irina", "Novik", 4, "DEPARTMENT_HEAD"),
-       ("Ivan", "Vasiliev", 5, "DEPARTMENT_HEAD"),
-       ("Dmitriy", "Oskin", 6, "DEPARTMENT_HEAD"),
-       ("Elena", "Shavruk", 7, "DEPARTMENT_HEAD"),
-       ("Vasiliy", "Novikov", 8, "DEPARTMENT_HEAD"),
-       ("Viktor", "Mironenko", 8, "DEPARTMENT_HEAD"),
-       ("Andrey", "Sedyn", 4, "DEPARTMENT_HEAD"),
-       ("Nastasya", "Novik", 5, "DEPARTMENT_HEAD"),
-       ("Alexandr", "Bylova", 2, "DEPARTMENT_HEAD"),
-       ("Olga", "Piluga", 1, "DEPARTMENT_HEAD"),
-       ("Ellina", "Dashuk", 1, "DEPARTMENT_HEAD"),
-       ("Galina", "Podgornaya", 2, "DEPARTMENT_HEAD"),
-       ("Nikolay", "Punchik", 4, "DEPARTMENT_HEAD"),
-       ("Vasiliy", "Korchik", 5, "DEPARTMENT_HEAD");
+insert into Employees (first_name, last_name, specialization_id, qualification, position)
+values ('Ivan', 'Ivanov', 2, 5, 'DOCTOR'),
+       ('Petr', 'Petrov', 3, 5, 'DOCTOR'),
+       ('Maria', 'Loseva', 5, 5, 'DOCTOR'),
+       ('Vladimir', 'Vladimirov', 1, 5, 'DEPARTMENT_HEAD'),
+       ('Petr', 'Ivanov', 2, 5, 'DEPARTMENT_HEAD'),
+       ('Zinaida', 'Morozova', 3, 5, 'DEPARTMENT_HEAD'),
+       ('Irina', 'Novik', 4, 5, 'DEPARTMENT_HEAD'),
+       ('Ivan', 'Vasiliev', 5, 5, 'DEPARTMENT_HEAD'),
+       ('Dmitriy', 'Oskin', 6, 5, 'DEPARTMENT_HEAD'),
+       ('Elena', 'Shavruk', 7, 5, 'DEPARTMENT_HEAD'),
+       ('Vasiliy', 'Novikov', 8, 5, 'DEPARTMENT_HEAD'),
+       ('Viktor', 'Mironenko', 8, 5, 'DEPARTMENT_HEAD'),
+       ('Andrey', 'Sedyn', 4, 5, 'DEPARTMENT_HEAD'),
+       ('Nastasya', 'Novik', 5, 5, 'DEPARTMENT_HEAD'),
+       ('Alexandr', 'Bylova', 2, 5, 'DEPARTMENT_HEAD'),
+       ('Olga', 'Piluga', 1, 5, 'DEPARTMENT_HEAD'),
+       ('Ellina', 'Dashuk', 1, 5, 'DEPARTMENT_HEAD'),
+       ('Galina', 'Podgornaya', 2, 5, 'DEPARTMENT_HEAD'),
+       ('Nikolay', 'Punchik', 4, 5, 'DEPARTMENT_HEAD'),
+       ('Vasiliy', 'Korchik', 5, 5, 'DEPARTMENT_HEAD');
 
 insert into Hospitals (title, chief_doctor_id, address_id, phone_number)
-values ("City clinical hospital №6", 1, 1, 12345),
-       ("City clinical hospital №5", 2, 2, 67891),
-       ("Ambulance hospital", 3, 3, 13579);
+values ('City clinical hospital №6', 1, 1, 12345),
+       ('City clinical hospital №5', 2, 2, 67891),
+       ('Ambulance hospital', 3, 3, 13579);
 
 insert into Departments (title, department_head_id, hospital_id)
-values ("therapeutic", 11, 1),
-       ("cardiological", 5, 1),
-       ("oncological", 6, 1),
-       ("neurological", 9, 1),
-       ("anesthetic and intensive care", 4, 1),
-       ("surgical", 7, 1),
-       ("traumatological", 8, 1),
-       ("dental", 10, 1),
-       ("therapeutic", 12, 2),
-       ("surgical", 13, 2),
-       ("traumatological", 14, 2),
-       ("cardiological", 15, 2),
-       ("anesthetic and intensive care", 16, 2),
-       ("anesthetic and intensive care", 17, 3),
-       ("cardiological", 18, 3),
-       ("surgical", 19, 3),
-       ("traumatological", 20, 3);
+values ('therapeutic', 11, 1),
+       ('cardiological', 5, 1),
+       ('oncological', 6, 1),
+       ('neurological', 9, 1),
+       ('anesthetic and intensive care', 4, 1),
+       ('surgical', 7, 1),
+       ('traumatological', 8, 1),
+       ('dental', 10, 1),
+       ('therapeutic', 12, 2),
+       ('surgical', 13, 2),
+       ('traumatological', 14, 2),
+       ('cardiological', 15, 2),
+       ('anesthetic and intensive care', 16, 2),
+       ('anesthetic and intensive care', 17, 3),
+       ('cardiological', 18, 3),
+       ('surgical', 19, 3),
+       ('traumatological', 20, 3);
 
 insert into Employees (first_name, last_name, specialization_id, department_id, qualification)
-values ("Alexandr", "Konyukh", 8, 1, 2),
-       ("Alexandr", "Vorobyev", 2, 2, 1),
-       ("Valeriy", "Litvinets", 5, 11, 2),
-       ("Yakub", "Kolas", 7, 12, 2),
-       ("Yanka", "Kupala", 2, 15, 2),
-       ("Dmitriy", "Marushka", 4, 16, 2);
+values ('Alexandr', 'Konyukh', 8, 1, 2),
+       ('Alexandr', 'Vorobyev', 2, 2, 1),
+       ('Valeriy', 'Litvinets', 5, 11, 2),
+       ('Yakub', 'Kolas', 7, 12, 2),
+       ('Yanka', 'Kupala', 2, 15, 2),
+       ('Dmitriy', 'Marushka', 4, 16, 2);
 
 insert into Wards (number, floor, department_id)
 values (100, 1, 7),
@@ -133,10 +133,10 @@ values (1, 'asthma', 'terrible headache'),
        (4, 'pneumonia', 'terrible headache');
 
 insert into Patients (first_name, last_name, age, ward_id, disease_history_id)
-values ("Diana", "Melnikova", 48, 3, 1),
-       ("Valeria", "Sidyako", 22, 2, 2),
-       ("Vladislav", "Kolesnik", 56, 1, 3),
-       ("Kristina", "Kolesnik", 43, 1, 4);
+values ('Diana', 'Melnikova', 48, 3, 1),
+       ('Valeria', 'Sidyako', 22, 2, 2),
+       ('Vladislav', 'Kolesnik', 56, 1, 3),
+       ('Kristina', 'Kolesnik', 43, 1, 4);
 
 insert into Department_equipments (department_id, equipment_id, quantity)
 values (4, 5, 32),

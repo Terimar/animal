@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.laba.hospital.dao.IEmployeeDao">
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into Employees (first_name, last_name, specialization_id, posiion, qualification) values (#{firstName}, #{lastName}, #{specialization.id}, #{position}, #{qualification})
+    </insert>
+
+    <sql id="getAll">
+        select e.id, e.first_name, e.last_name, e.position, e.qualification,
+               s.id as specialization_id, s.name as specialization_name, s.salary as specialization_salary,
+               a.id as appointment_id, a.date as appointment_date,
+               p.id as appointment_patient_id, p.first_name as appointment_patient_first_name, p.last_name as appointment_patient_last_name, p.age as appointment_patient_age,
+               r.id as appointment_room_id, r.number as appointment_room_number
+        from Employees e
+                 left join Specializations s on e.specialization_id = s.id
+                 left join Appointments a on a.employee_id = e.id
+                 left join Patients p on p.id = a.patient_id
+                 left join Rooms r on a.room_id = r.id
+    </sql>
+
+    <select id="getEntityById" resultMap="EmployeeResultMap">
+        <include refid="getAll"/>
+        where e.id = #{id}
+    </select>
+
+    <update id="updateEntity">
+        update Employees set first_name = #{firstName}, last_name = #{lastName}, specialization_id = #{specialization.id}, posiion = #{position}, qualification = #{qualification} where id = #{id}
+    </update>
+
+    <delete id="removeEntity">
+        delete from Employees where id = #{id}
+    </delete>
+
+    <resultMap id="EmployeeResultMap" type="com.solvd.laba.hospital.model.Employee" extends="PersonResultMap" autoMapping="false">
+        <result property="position" column="position"/>
+        <result property="qualification" column="qualification"/>
+        <association property="specialization" columnPrefix="specialization_" resultMap="com.solvd.laba.hospital.dao.ISpecializationDao.SpecializationResultMap"/>
+        <collection property="appointments" columnPrefix="appointment_" resultMap="AppointmentResultMap"/>
+    </resultMap>
+
+    <resultMap id="AppointmentResultMap" type="com.solvd.laba.hospital.model.Appointment" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="date" column="date"/>
+        <association property="patient" columnPrefix="patient_" resultMap="PatientResultMap"/>
+        <association property="room" columnPrefix="room_" resultMap="com.solvd.laba.hospital.dao.IRoomDao.RoomResultMap"/>
+    </resultMap>
+
+    <resultMap id="PatientResultMap" type="com.solvd.laba.hospital.model.Patient" extends="PersonResultMap" autoMapping="false">
+        <result property="age" column="age"/>
+    </resultMap>
+
+    <resultMap id="PersonResultMap" type="com.solvd.laba.hospital.model.Person" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+    </resultMap>
+</mapper>

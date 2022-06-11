@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.laba.hospital.dao.IAddressDao">
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into Addresses (city, street, building_number) values (#{city}, #{street}, #{buildingNumber})
+    </insert>
+
+    <select id="getEntityById" resultMap="AddressResultMap">
+        select id, city, street, building_number from Addresses where id = #{id}
+    </select>
+
+    <update id="updateEntity">
+        update Addresses set city = #{city}, street = #{street}, building_number = #{buildingNumber} where id = #{id}
+    </update>
+
+    <delete id="removeEntity">
+        delete from Addresses where id = #{id}
+    </delete>
+
+    <resultMap id="AddressResultMap" type="com.solvd.laba.hospital.model.Address" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="city" column="city"/>
+        <result property="street" column="street"/>
+        <result property="buildingNumber" column="building_number"/>
+    </resultMap>
+</mapper>

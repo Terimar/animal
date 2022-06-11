@@ -49,7 +49,7 @@ public class EmployeeDao implements IEmployeeDao {
     @Override
     public void saveEntity(Employee entity) {
         Connection connection = CONNECTION_POOL.getConnection();
-        String insert = "insert into Employees (first_name, last_name, specialization_id, posiion, qualification) values (?, ?, ?, ?, ?, ?)";
+        String insert = "insert into Employees (first_name, last_name, specialization_id, posiion, qualification) values (?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, entity.getFirstName());

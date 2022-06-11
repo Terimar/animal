@@ -1,11 +1,13 @@
 package com.solvd.laba.hospital.service;
 
+import com.solvd.laba.hospital.dao.ISpecializationDao;
 import com.solvd.laba.hospital.dao.impl.SpecializationDao;
+import com.solvd.laba.hospital.dao.impl.SpecializationMybatisDao;
 import com.solvd.laba.hospital.model.Specialization;
 
 public class SpecializationService {
 
-    private final SpecializationDao specializationDao = new SpecializationDao();
+    private final ISpecializationDao specializationDao = new SpecializationMybatisDao();//new SpecializationDao();
 
     public Specialization create(Specialization specialization) {
         specializationDao.saveEntity(specialization);

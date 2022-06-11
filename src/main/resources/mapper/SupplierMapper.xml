@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.laba.hospital.dao.ISupplierDao">
+
+    <insert id="saveEntity" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into Suppliers (name, country) values (#{name}, #{country})
+    </insert>
+
+    <select id="getEntityById" resultMap="SupplierResultMap">
+        select id, name, country from Suppliers where id = #{id}
+    </select>
+
+    <update id="updateEntity">
+        update Suppliers set name = #{name}, country = #{country} where id = #{id}
+    </update>
+
+    <delete id="removeEntity">
+        delete from Suppliers where id = #{id}
+    </delete>
+
+    <resultMap id="SupplierResultMap" type="com.solvd.laba.hospital.model.Supplier" autoMapping="false">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="country" column="country"/>
+    </resultMap>
+</mapper>

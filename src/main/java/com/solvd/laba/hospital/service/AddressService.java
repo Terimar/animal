@@ -1,11 +1,13 @@
 package com.solvd.laba.hospital.service;
 
+import com.solvd.laba.hospital.dao.IAddressDao;
 import com.solvd.laba.hospital.dao.impl.AddressDao;
+import com.solvd.laba.hospital.dao.impl.AddressMybatisDao;
 import com.solvd.laba.hospital.model.Address;
 
 public class AddressService {
 
-    private final AddressDao addressDao = new AddressDao();
+    private final IAddressDao addressDao = new AddressMybatisDao();//new AddressDao();
 
     public Address create(Address address) {
         addressDao.saveEntity(address);
