@@ -1,9 +1,13 @@
 package com.solvd.laba.hospital;
 
+import com.solvd.laba.hospital.dao.listener.DbEventManager;
+import com.solvd.laba.hospital.dao.listener.PrintListener;
 import com.solvd.laba.hospital.model.*;
 import com.solvd.laba.hospital.service.EmployeeService;
 import com.solvd.laba.hospital.service.RoomService;
 import com.solvd.laba.hospital.service.SupplierService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -11,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
         File xmlFile = new File("src/main/resources/files/hospital.xml");
@@ -165,8 +171,14 @@ public class Main {
         hospital.setChiefDoctor(employee2);
         hospital.setPhoneNumber(12345);
 
-        Room room = new Room();
-        room.setNumber(12345);
+        Room room = Room.builder()
+                .id(1L)
+                .number(12345)
+                .build();
+
+        DbEventManager.createInstance().subscribe(DbEventManager.Type.EMPLOYEE_GETTING, new PrintListener());
+        DbEventManager.createInstance().subscribe(DbEventManager.Type.EMPLOYEE_SAVING, new PrintListener());
+        DbEventManager.createInstance().subscribe(DbEventManager.Type.ROOM_SAVING, new PrintListener());
 
         RoomService roomService = new RoomService();
         room = roomService.create(room);
@@ -177,6 +189,10 @@ public class Main {
         EmployeeService employeeService = new EmployeeService();
         Employee foundEmployee = employeeService.getById(1L);
 
-        System.out.println(foundEmployee);
+        DbEventManager.createInstance().unsubscribe(DbEventManager.Type.EMPLOYEE_GETTING, new PrintListener());
+        DbEventManager.createInstance().unsubscribe(DbEventManager.Type.EMPLOYEE_SAVING, new PrintListener());
+        DbEventManager.createInstance().unsubscribe(DbEventManager.Type.ROOM_SAVING, new PrintListener());
+
+        LOGGER.info(foundEmployee);
     }
 }

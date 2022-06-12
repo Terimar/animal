@@ -2,6 +2,7 @@ package com.solvd.laba.hospital.dao.impl;
 
 import com.solvd.laba.hospital.dao.ConnectionPool;
 import com.solvd.laba.hospital.dao.IEmployeeDao;
+import com.solvd.laba.hospital.dao.listener.DbEventManager;
 import com.solvd.laba.hospital.model.Employee;
 import com.solvd.laba.hospital.model.Specialization;
 
@@ -43,6 +44,8 @@ public class EmployeeDao implements IEmployeeDao {
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
+
+        DbEventManager.createInstance().notify(DbEventManager.Type.EMPLOYEE_GETTING, "Employee " + employee.getId() + " was found");
         return employee;
     }
 
@@ -68,6 +71,8 @@ public class EmployeeDao implements IEmployeeDao {
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
+
+        DbEventManager.createInstance().notify(DbEventManager.Type.EMPLOYEE_SAVING, "Employee " + entity.getId() + " was saved");
     }
 
     @Override

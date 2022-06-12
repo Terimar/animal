@@ -9,18 +9,16 @@ public class SpecializationMybatisDao implements ISpecializationDao {
 
     @Override
     public Specialization getEntityById(long id) {
-        Specialization result;
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISpecializationDao specializationDao = session.getMapper(ISpecializationDao.class);
-            result = specializationDao.getEntityById(id);
+            ISpecializationDao specializationDao = (ISpecializationDao) DaoFactory.createDao(session, "specialization");
+            return specializationDao.getEntityById(id);
         }
-        return result;
     }
 
     @Override
     public void saveEntity(Specialization entity) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISpecializationDao specializationDao = session.getMapper(ISpecializationDao.class);
+            ISpecializationDao specializationDao = (ISpecializationDao) DaoFactory.createDao(session, "specialization");
             specializationDao.saveEntity(entity);
         }
     }
@@ -28,7 +26,7 @@ public class SpecializationMybatisDao implements ISpecializationDao {
     @Override
     public void updateEntity(Specialization entity) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISpecializationDao specializationDao = session.getMapper(ISpecializationDao.class);
+            ISpecializationDao specializationDao = (ISpecializationDao) DaoFactory.createDao(session, "specialization");
             specializationDao.updateEntity(entity);
         }
     }
@@ -36,7 +34,7 @@ public class SpecializationMybatisDao implements ISpecializationDao {
     @Override
     public void removeEntity(long id) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISpecializationDao specializationDao = session.getMapper(ISpecializationDao.class);
+            ISpecializationDao specializationDao = (ISpecializationDao) DaoFactory.createDao(session, "specialization");
             specializationDao.removeEntity(id);
         }
     }

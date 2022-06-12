@@ -9,18 +9,16 @@ public class AddressMybatisDao implements IAddressDao {
 
     @Override
     public Address getEntityById(long id) {
-        Address result;
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            IAddressDao addressDao = session.getMapper(IAddressDao.class);
-            result = addressDao.getEntityById(id);
+            IAddressDao addressDao = (AddressDao) DaoFactory.createDao(session, "address");
+            return addressDao.getEntityById(id);
         }
-        return result;
     }
 
     @Override
     public void saveEntity(Address entity) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            IAddressDao addressDao = session.getMapper(IAddressDao.class);
+            IAddressDao addressDao = (AddressDao) DaoFactory.createDao(session, "address");
             addressDao.saveEntity(entity);
         }
     }
@@ -28,7 +26,7 @@ public class AddressMybatisDao implements IAddressDao {
     @Override
     public void updateEntity(Address entity) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            IAddressDao addressDao = session.getMapper(IAddressDao.class);
+            IAddressDao addressDao = (AddressDao) DaoFactory.createDao(session, "address");
             addressDao.updateEntity(entity);
         }
     }
@@ -36,7 +34,7 @@ public class AddressMybatisDao implements IAddressDao {
     @Override
     public void removeEntity(long id) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            IAddressDao addressDao = session.getMapper(IAddressDao.class);
+            IAddressDao addressDao = (AddressDao) DaoFactory.createDao(session, "address");
             addressDao.removeEntity(id);
         }
     }

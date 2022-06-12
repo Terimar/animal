@@ -20,4 +20,31 @@ public class Room {
     public void setNumber(Integer number) {
         this.number = number;
     }
+
+    public static RoomBuilder builder() {
+        return new RoomBuilder(new Room());
+    }
+
+    public static class RoomBuilder {
+
+        private final Room room;
+
+        public RoomBuilder(Room room) {
+            this.room = room;
+        }
+
+        public RoomBuilder id(Long id) {
+            this.room.id = id;
+            return this;
+        }
+
+        public RoomBuilder number(Integer number) {
+            this.room.number = number;
+            return this;
+        }
+
+        public Room build() {
+            return room;
+        }
+    }
 }

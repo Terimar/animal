@@ -1,13 +1,13 @@
 package com.solvd.laba.hospital.service;
 
 import com.solvd.laba.hospital.dao.ISupplierDao;
-import com.solvd.laba.hospital.dao.impl.SupplierDao;
-import com.solvd.laba.hospital.dao.impl.SupplierMybatisDao;
+import com.solvd.laba.hospital.dao.factory.AbstractDaoFactory;
+import com.solvd.laba.hospital.dao.factory.DaoType;
 import com.solvd.laba.hospital.model.Supplier;
 
 public class SupplierService {
 
-    private final ISupplierDao supplierDao = new SupplierMybatisDao();//new SupplierDao();
+    private final ISupplierDao supplierDao = (ISupplierDao) AbstractDaoFactory.createDao(DaoType.MYBATIS).createDao("supplier");
 
     public Supplier create(Supplier supplier) {
         supplierDao.saveEntity(supplier);

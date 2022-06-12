@@ -2,6 +2,7 @@ package com.solvd.laba.hospital.dao.impl;
 
 import com.solvd.laba.hospital.dao.ConnectionPool;
 import com.solvd.laba.hospital.dao.IRoomDao;
+import com.solvd.laba.hospital.dao.listener.DbEventManager;
 import com.solvd.laba.hospital.model.Room;
 
 import java.sql.*;
@@ -54,6 +55,8 @@ public class RoomDao implements IRoomDao {
         } finally {
             CONNECTION_POOL.releaseConnection(connection);
         }
+
+        DbEventManager.createInstance().notify(DbEventManager.Type.ROOM_SAVING, "Room " + entity.getId() + " was saved");
     }
 
     @Override

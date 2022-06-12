@@ -9,18 +9,16 @@ public class SupplierMybatisDao implements ISupplierDao {
 
     @Override
     public Supplier getEntityById(long id) {
-        Supplier result;
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISupplierDao supplierDao = session.getMapper(ISupplierDao.class);
-            result = supplierDao.getEntityById(id);
+            ISupplierDao supplierDao = (ISupplierDao) DaoFactory.createDao(session, "supplier");
+            return supplierDao.getEntityById(id);
         }
-        return result;
     }
 
     @Override
     public void saveEntity(Supplier entity) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISupplierDao supplierDao = session.getMapper(ISupplierDao.class);
+            ISupplierDao supplierDao = (ISupplierDao) DaoFactory.createDao(session, "supplier");
             supplierDao.saveEntity(entity);
         }
     }
@@ -28,7 +26,7 @@ public class SupplierMybatisDao implements ISupplierDao {
     @Override
     public void updateEntity(Supplier entity) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISupplierDao supplierDao = session.getMapper(ISupplierDao.class);
+            ISupplierDao supplierDao = (ISupplierDao) DaoFactory.createDao(session, "supplier");
             supplierDao.updateEntity(entity);
         }
     }
@@ -36,7 +34,7 @@ public class SupplierMybatisDao implements ISupplierDao {
     @Override
     public void removeEntity(long id) {
         try (SqlSession session = MybatisConfig.getSqlSessionFactory().openSession(true)) {
-            ISupplierDao supplierDao = session.getMapper(ISupplierDao.class);
+            ISupplierDao supplierDao = (ISupplierDao) DaoFactory.createDao(session, "supplier");
             supplierDao.removeEntity(id);
         }
     }

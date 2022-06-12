@@ -1,14 +1,14 @@
 package com.solvd.laba.hospital.service;
 
 import com.solvd.laba.hospital.dao.IEmployeeDao;
-import com.solvd.laba.hospital.dao.impl.EmployeeDao;
-import com.solvd.laba.hospital.dao.impl.EmployeeMybatisDao;
+import com.solvd.laba.hospital.dao.factory.AbstractDaoFactory;
+import com.solvd.laba.hospital.dao.factory.DaoType;
 import com.solvd.laba.hospital.model.Employee;
 import com.solvd.laba.hospital.model.Specialization;
 
 public class EmployeeService {
 
-    private final IEmployeeDao employeeDao = new EmployeeMybatisDao();//new EmployeeDao();
+    private final IEmployeeDao employeeDao = (IEmployeeDao) AbstractDaoFactory.createDao(DaoType.MYBATIS).createDao("employee");
     private final SpecializationService specializationService = new SpecializationService();
 
     public Employee create(Employee employee) {
